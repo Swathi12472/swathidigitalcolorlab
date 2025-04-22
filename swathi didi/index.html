@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swathi Digital Colour Lab</title>
+    <!-- Import Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    
+    <!-- Favicon links -->
+    <link rel="icon" type="image/x-icon" href="images/Swathi-removebg-preview.png">
+        
+    <style>
+        /* ===== COLOR SCHEME TO MATCH LOGO ===== */
+        :root {
+          --primary: #8e44ad;     /* Deep purple - main logo color */
+          --secondary: #3498db;   /* Blue accent - secondary logo color */
+          --accent: #e74c3c;      /* Highlight color for important elements */
+          --dark: #34495e;        /* Dark color for text */
+          --light: #ecf0f1;       /* Light color for backgrounds */
+        }
+        
+        /* ===== RESET & GLOBALS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo img {
+            height: 90px;
+            margin-right: 20px;
+            vertical-align: middle;
+        }
+
+        header h1 img {
+            height: 90px;
+            vertical-align: middle;
+            margin-right: 20px;
+        }
+
+        /* Add these styles to your existing CSS */
+        .custom-logo {
+            height: 40px;
+            width: auto;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        
+        .header-logo {
+            height: 60px;
+            width: auto;
+            vertical-align: middle;
+            margin-right: 15px;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== NAVBAR STYLES ===== */
+        .navbar {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 0.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0.75rem;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        /* Responsive styles for navbar */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, var(--secondary), var(--primary));
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                gap: 1rem;
+                display: none;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .nav-links a {
+                display: block;
+                padding: 0.75rem 1rem;
+            }
+        }
+
+        /* ===== HEADER STYLES ===== */
+        header {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* ===== SECTION STYLES ===== */
+        .services, .contact, .gallery {
+            padding: 4rem 0;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .services {
+            background: linear-gradient(135deg, var(--light), var(--primary));
+        }
+        
+        .contact {
+            background: linear-gradient(135deg, var(--light), var(--secondary));
+        }
+
+        .gallery {
+            background-color: var(--light);
+        }
+
+        .services h2, .contact h2, .gallery h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        /* ===== SERVICES GRID ===== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Changed from 4 to 2 columns */
+            gap: 30px; /* Increased gap for better spacing between the larger cards */
+            width: 100%;
+        }
+        
+        .service-card {
+            border: 1px solid #eee;
+            border-radius: 8px; /* Slightly increased border radius */
+            padding: 2rem; /* Increased padding */
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-color: white;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Added subtle shadow */
+        }
+        
+        .service-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            border-color: var(--secondary);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .service-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .service-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .service-image img {
+            width: 100%; /* Make image take full width of card */
+            height: 250px; /* Increased height */
+            object-fit: cover;
+            border-radius: 5px; /* Add slight border radius to images */
+        }
+
+        /* Update responsive styles to maintain 2 columns on larger screens and 1 on mobile */
+        @media (max-width: 900px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr); /* Keep 2 columns on medium screens */
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .services-grid {
+                grid-template-columns: 1fr; /* 1 column on very small screens */
+            }
+        }
+
+        /* ===== CONTACT FORM STYLES ===== */
+        .contact-form {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--secondary), var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .contact-form h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: white;
+        }
+        
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--dark);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        button[type="submit"] {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: block;
+            width: 100%;
+            font-weight: bold;
+        }
+        
+        button[type="submit"]:hover {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Success message */
+        .success-message {
+            background-color: #27ae60;
+            color: white;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            display: none;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        .success-message i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* ===== CONTACT INFO STYLES ===== */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-info p {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .contact-info strong {
+            color: var(--primary);
+        }
+
+        /* ===== MAP CONTAINER ===== */
+        .map-container {
+            flex: 1;
+            min-width: 300px;
+            height: 350px;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ===== GALLERY STYLES ===== */
+        .gallery {
+            padding: 4rem 0;
+            background-color: var(--light);
+        }
+
+        .gallery h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns for larger screens */
+            gap: 20px;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative; /* Position relative for 3D effect */
+        }
+
+        .coming-soon {
+            background-color: #f0f0f0; /* Light gray background for placeholder */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px; /* Fixed height for the item */
+            perspective: 1000px; /* Perspective for 3D effect */
+        }
+
+        .coming-soon-text {
+            font-size: 2rem; /* Increased font size for better visibility */
+            font-weight: bold;
+            color: var(--primary);
+            transform: translateZ(0); /* Initial position */
+            transition: transform 0.3s, text-shadow 0.3s; /* Transition for 3D effect */
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+        }
+
+        .coming-soon:hover .coming-soon-text {
+            transform: translateZ(20px); /* Increase 3D effect on hover */
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+        }
+
+        /* Responsive styles for gallery */
+        @media (max-width: 900px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .gallery-grid {
+                grid-template-columns: 1fr; /* 1 column on small screens */
+            }
+        }
+
+        /* ===== SOCIAL ICONS ===== */
+        .social-icons {
+            margin: 1rem 0;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            color: var(--primary);
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: var(--secondary);
+        }
+
+        /* ===== FOOTER STYLES ===== */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+
+        /* Fade-in effect for sections */
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .fade-in.fade-in {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container container">
+            <a href="images/Swathi-removebg-preview.png" class="logo">
+                <img src="images/Swathi-removebg-preview.png" alt="SDCL Logo" width="100" height="150"> 
+            </a>
+            
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#request">Place your order</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home">
+        <div class="container">
+            <h1>SWATHI DIGITAL COLOUR LAB</h1>
+            <p>Your one-stop shop for all digital printing needs</p>
+        </div>
+    </header>
+    
+   <!-- OUR SERVICES Section with Images -->
+   <section class="services" id="services">
+       <div class="container">
+           <h2><i class="fas fa-cogs"></i> OUR SERVICES</h2>
+           <div class="services-grid">
+               <div class="service-card">
+                   <div class="service-image">
+                       <img src="images/Photo Frames & Photo Chocolates.webp" alt="Photo Frames & Photo Chocolates">
+                   </div>
+                   <h3>Photo Frames & Photo Chocolates</h3>
+                   <p>Preserve your memories with our premium photo frames and unique photo chocolates for special occasions.</p>
+               </div>
+               
+               <div class="service-card">
+                   <div class="service-image">
+                       <img src="images/Lighting Frames .jpeg" alt="Lighting Frames">
+                   </div>
+                   <h3>Lighting Frames</h3>
+                   <p>Illuminate your special moments with our beautiful lighting frames that add a magical glow to your photos.</p>
+               </div>
+               
+               <div class="service-card">
+                   <div class="service-image">
+                       <img src="images/Acrylic Frames.jpg" alt="Acrylic Frames">
+                   </div>
+                   <h3>Acrylic Frames</h3>
+                   <p>Modern, sleek acrylic frames that give your photos a contemporary look and feel.</p>
+               </div>
+               
+               <div class="service-card">
+                   <div class="service-image">
+                       <img src="images/Mug Printing.jpg" alt="Mug Printing">
+                   </div>
+                   <h3>Mug Printing</h3>
+                   <p>Personalized mug printing services to create the perfect gift for your loved ones.</p>
+               </div>
+               
+               <div class="service-card">
+                   <div class="service-image">
+                       <img src="images/ID Cards.webp" alt="ID Cards">
+                   </div>
+                   <h3>ID Cards</h3>
+                   <p>Professional ID card printing services for schools, businesses, and organizations.</p>
+               </div>
+               
+               <div class="service-card">
+                   <div class="service-image">
+                       <img src="images/Passport Size Photos.jpg" alt="Passport Size Photos">
+                   </div>
+                   <h3>Passport Size Photos</h3>
+                   <p>Quick and professional passport size photos that meet all official requirements.</p>
+               </div>
+               
+               <div class="service-card">
+                   <div class="service-image">
+                       <img src="images/Maxi Invitation Cards.webp" alt="Maxi Invitation Cards">
+                   </div>
+                   <h3>Maxi Invitation Cards</h3>
+                   <p>Beautiful, customized invitation cards for all your special events and celebrations.</p>
+               </div>
+               
+               <div class="service-card">
+                   <div class="service-image">
+                       <img src="images/pouchs.webp" alt="Printing Mobile Pouches">
+                   </div>
+                   <h3>Printing Mobile Pouches</h3>
+                   <p>Personalized mobile pouches with your favorite photos or designs.</p>
+               </div>
+           </div>
+       </div>
+   </section>
+
+   <!-- GALLERY Section -->
+   <section class="gallery" id="gallery">
+       <div class="container">
+           <h2><i class="fas fa-images"></i> GALLERY</h2>
+           <div class="gallery-grid">
+               <div class="gallery-item coming-soon">
+                   <div class="coming-soon-text">Coming Soon</div>
+               </div>
+               <div class="gallery-item coming-soon">
+                   <div class="coming-soon-text">Coming Soon</div>
+               </div>
+               <div class="gallery-item coming-soon">
+                   <div class="coming-soon-text">Coming Soon</div>
+               </div>
+               <div class="gallery-item coming-soon">
+                   <div class="coming-soon-text">Coming Soon</div>
+               </div>
+               <div class="gallery-item coming-soon">
+                   <div class="coming-soon-text">Coming Soon</div>
+               </div>
+               <div class="gallery-item coming-soon">
+                   <div class="coming-soon-text">Coming Soon</div>
+               </div>
+           </div>
+       </div>
+   </section>
+
+   <!-- Contact Form Section -->
+   <section class="contact-form" id="request">
+       <div class="container">
+           <h2><i class="fas fa-shopping-cart"></i> PLACE YOUR ORDER</h2>
+           <div class="form-container">
+               <div id="success-message" class="success-message">
+                   <i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully.
+               </div>
+               
+               <!-- Form with FormSubmit action -->
+               <form id="contactForm" method="POST" action="https://formsubmit.co/swathi.digitalcolorlab@gmail.com" enctype="multipart/form-data">
+                   <!-- Honeypot to prevent spam -->
+                   <input type="text" name="_honey" style="display:none">
+                   
+                   <!-- Disable captcha -->
+                   <input type="hidden" name="_captcha" value="false">
+                   
+                   <!-- Change to your actual website URL or use javascript redirect -->
+                   <input type="hidden" name="_next" value="">
+                   
+                   <!-- This will format the email as HTML table -->
+                   <input type="hidden" name="_template" value="table">
+                   
+                   <div class="form-group">
+                       <label for="name"><i class="fas fa-user"></i> Full Name</label>
+                       <input type="text" id="name" name="name" required>
+                   </div>
+                   
+                   <div class="form-group">
+                       <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+                       <input type="email" id="email" name="email" required>
+                   </div>
+                   
+                   <div class="form-group">
+                       <label for="phone"><i class="fas fa-phone"></i> Phone Number</label>
+                       <input type="tel" id="phone" name="phone" required>
+                   </div>
+                   
+                   <div class="form-group">
+                       <label for="service"><i class="fas fa-tasks"></i> PLACE YOUR ORDER</label>
+                       <select id="service" name="service" required>
+                           <option value="">-- Select a Service --</option>
+                           <option value="Photo Frames">Photo Frames</option>
+                           <option value="Photo Chocolates">Photo Chocolates</option>
+                           <option value="Lighting Frames">Lighting Frames</option>
+                           <option value="Acrylic Frames">Acrylic Frames</option>
+                           <option value="Mug Printing">Mug Printing</option>
+                           <option value="ID Cards">ID Cards</option>
+                           <option value="Passport Size Photos">Passport Size Photos</option>
+                           <option value="Maxi Invitation Cards">Maxi Invitation Cards</option>
+                           <option value="Printing Mobile Pouches">Printing Mobile Pouches</option>
+                           <option value="Other">Other</option>
+                       </select>
+                   </div>
+                   
+                   <!-- New photo upload section -->
+                   <div class="form-group">
+                       <label for="photo"><i class="fas fa-image"></i> Upload Photo (if applicable)</label>
+                       <input type="file" id="photo" name="photo" accept="image/*">
+                   </div>
+                   
+                   <div class="form-group">
+                       <label for="message"><i class="fas fa-comment-alt"></i> Your Message</label>
+                       <textarea id="message" name="message" placeholder="Tell us about your requirements..."></textarea>
+                   </div>
+                   
+                   <button type="submit"><i class="fas fa-paper-plane"></i> SEND REQUEST</button>
+               </form>
+           </div>
+       </div>
+   </section>
+
+   <section class="contact" id="contact">
+       <div class="container">
+           <h2><i class="fas fa-address-book"></i> CONTACT US</h2>
+           <div class="contact-container">
+               <div class="contact-info">
+                   <p><i class="fas fa-phone"></i> <strong>Phone:</strong> +91 93983 36377</p>
+                   <p><i class="fas fa-map-marked-alt"></i> <strong>Address:</strong> DIVILI, CHANDRAMAMPALLI</p>
+                   <p><i class="fas fa-location-arrow"></i> <strong>Location:</strong> Opposite Chinna Tirupathi Road</p>
+                   <p><i class="fas fa-clock"></i> <strong>Business Hours:</strong> 9:00 AM - 8:00 PM (Mon-Sat)</p>
+                   
+                   <div class="social-icons">
+                       <a href="#"><i class="fab fa-facebook"></i></a>
+                       <a href="https://www.instagram.com/swathi_colour_lab/?hl=en"><i class="fab fa-instagram"></i></a>
+                       <a href="https://wa.me/919398336377"><i class="fab fa-whatsapp"></i></a>
+                   </div>
+               </div>
+               
+               <div class="map-container">
+                   <!-- Google Maps iframe with your shop's location -->
+                   <iframe src="https://www.google.com/maps/embed?pb=!4v1742229114378!6m8!1m7!1svE2uSaFZkxUgwOopkTmcKA!2m2!1d17.14773842440441!2d82.16354689213235!3f129.55830744959707!4f-2.2519243135651976!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+               </div>
+           </div>
+       </div>
+   </section>
+        
+   <footer>
+       <div class="container">
+           <p><i class="far fa-copyright"></i> 2025 Swathi Digital Colour Lab. All Rights Reserved.</p>
+       </div>
+   </footer>
+    
+   <!-- JavaScript for form submission and navbar -->
+   <script>
+       // Form submission handling
+       document.getElementById('contactForm').addEventListener('submit', function(e) {
+           // Prevent the default form submission
+           e.preventDefault();
+           
+           // Get the form data
+           const formData = new FormData(this);
+           
+           // Show loading indicator
+           const submitBtn = this.querySelector('button[type="submit"]');
+           const originalBtnText = submitBtn.innerHTML;
+           submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+           submitBtn.disabled = true;
+           
+           // Submit the form data using fetch API
+           fetch('https://formsubmit.co/swathi.digitalcolorlab@gmail.com', {
+               method: 'POST',
+               body: formData
+           })
+           .then(response => {
+               // Show success message
+               document.getElementById('success-message').style.display = 'block';
+               
+               // Clear form fields
+               document.getElementById('contactForm').reset();
+               
+               // Reset button
+               submitBtn.innerHTML = originalBtnText;
+               submitBtn.disabled = false;
+               
+               // Hide success message after 5 seconds
+               setTimeout(function() {
+                   document.getElementById('success-message').style.display = 'none';
+               }, 5000);
+           })
+           .catch(error => {
+               console.error('Error:', error);
+               alert('There was an error submitting your form. Please try again.');
+               
+               // Reset button
+               submitBtn.innerHTML = originalBtnText;
+               submitBtn.disabled = false;
+           });
+       });
+
+       // Mobile menu toggle
+       document.getElementById('hamburger').addEventListener('click', function() {
+           document.getElementById('nav-links').classList.toggle('active');
+       });
+       
+       // Close mobile menu when clicking a link
+       document.querySelectorAll('.nav-links a').forEach(link => {
+           link.addEventListener('click', function() {
+               document.getElementById('nav-links').classList.remove('active');
+           });
+       });
+       
+       // Add smooth scrolling to all navbar links
+       document.querySelectorAll('.nav-links a').forEach(anchor => {
+           anchor.addEventListener('click', function(e) {
+               e.preventDefault();
+               
+               const targetId = this.getAttribute('href');
+               const targetElement = document.querySelector(targetId);
+               
+               if (targetElement) {
+                   window.scrollTo({
+                       top: targetElement.offsetTop - 70, // Offset for fixed navbar
+                       behavior: 'smooth'
+                   });
+               }
+           });
+       });
+       
+       // Highlight active menu item based on scroll position
+       window.addEventListener('scroll', function() {
+           const sections = document.querySelectorAll('section, header');
+           const navLinks = document.querySelectorAll('.nav-links a');
+           
+           let current = '';
+           
+           sections.forEach(section => {
+               const sectionTop = section.offsetTop;
+               const sectionHeight = section.clientHeight;
+               if (scrollY >= sectionTop - 100) {
+                   current = section.getAttribute('id');
+               }
+           });
+           
+           navLinks.forEach(link => {
+               link.classList.remove('active');
+               if (link.getAttribute('href') === '#' + current) {
+                   link.classList.add('active');
+               }
+           });
+       });
+
+       // Add fade-in effect for sections
+       const sections = document.querySelectorAll('header, .services, .contact, .gallery');
+
+       const options = {
+           root: null,
+           threshold: 0.1,
+       };
+
+       const observer = new IntersectionObserver((entries) => {
+           entries.forEach(entry => {
+               if (entry.isIntersecting) {
+                   entry.target.classList.add('fade-in');
+               } else {
+                   entry.target.classList.remove('fade-in');
+               }
+           });
+       }, options);
+
+       sections.forEach(section => {
+           observer.observe(section);
+       });
+   </script>
+</body>
+</html>
